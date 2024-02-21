@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyblue.sys.mapper.JobMatchMapper">
+
+    <select id="getJobMatchDetails" resultMap="JobMatchDTOResultMap">
+        SELECT
+            jm.id AS "id",
+            jm.match_time AS "matchTime",
+            sd.id AS "student_id",
+            sd.uid AS "student_uid",
+            sd.name AS "student_name",
+            sd.industry_type AS "student_industryType",
+            sd.age AS "student_age",
+            sd.gender AS "student_gender",
+            sd.available_start AS "student_availableStart",
+            sd.available_end AS "student_availableEnd",
+            sd.match_status AS "student_matchStatus",
+            sd.describe AS "student_describe",
+            sd.supervisor AS "student_supervisor",
+            sd.supervisor_phone AS "student_supervisorPhone",
+            cd.id AS "company_id",
+            cd.uid AS "company_uid",
+            cd.company_name AS "company_companyName",
+            cd.industry_type AS "company_industryType",
+            cd.gender_require AS "company_genderRequire",
+            cd.position_start AS "company_positionStart",
+            cd.position_end AS "company_positionEnd",
+            cd.quota AS "company_quota",
+            cd.position_describe AS "company_positionDescribe",
+            cd.contact_person AS "company_contactPerson",
+            cd.contact_phone AS "company_contactPhone",
+            cd.company_address AS "company_companyAddress"
+        FROM
+            job_match jm
+                INNER JOIN student_detail sd ON jm.student_id = sd.id
+                INNER JOIN company_detail cd ON jm.company_id = cd.id
+    </select>
+
+    <resultMap id="JobMatchDTOResultMap" type="com.skyblue.sys.dto.JobMatchDTO">
+        <id property="id" column="id"/>
+        <result property="matchTime" column="matchTime"/>
+        <association property="student" javaType="com.skyblue.sys.entity.StudentDetail">
+            <id property="id" column="student_id"/>
+            <result property="uid" column="student_uid"/>
+            <result property="name" column="student_name"/>
+            <result property="industryType" column="student_industryType"/>
+            <result property="age" column="student_age"/>
+            <result property="gender" column="student_gender"/>
+            <result property="availableStart" column="student_availableStart"/>
+            <result property="availableEnd" column="student_availableEnd"/>
+            <result property="matchStatus" column="student_matchStatus"/>
+            <result property="describe" column="student_describe"/>
+            <result property="supervisor" column="student_supervisor"/>
+            <result property="supervisorPhone" column="student_supervisorPhone"/>
+        </association>
+        <association property="company" javaType="com.skyblue.sys.entity.CompanyDetail">
+            <id property="id" column="company_id"/>
+            <result property="uid" column="company_uid"/>
+            <result property="companyName" column="company_companyName"/>
+            <result property="industryType" column="company_industryType"/>
+            <result property="genderRequire" column="company_genderRequire"/>
+            <result property="positionStart" column="company_positionStart"/>
+            <result property="positionEnd" column="company_positionEnd"/>
+            <result property="quota" column="company_quota"/>
+            <result property="positionDescribe" column="company_positionDescribe"/>
+            <result property="contactPerson" column="company_contactPerson"/>
+            <result property="contactPhone" column="company_contactPhone"/>
+            <result property="companyAddress" column="company_companyAddress"/>
+        </association>
+    </resultMap>
+</mapper>

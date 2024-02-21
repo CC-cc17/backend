@@ -1,0 +1,22 @@
+server:
+  port: 6677
+
+spring:
+  datasource:
+    username: root
+    password: RR13ap23
+    url: jdbc:mysql://localhost/test3?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Shanghai
+redis:
+  port: 6379
+  host: localhost
+
+logging:
+  level:
+    com:
+      baomidou:
+        mybatisplus:
+          core:
+            mapper: DEBUG
+    skyblue:
+      sys:
+        mapper: DEBUG

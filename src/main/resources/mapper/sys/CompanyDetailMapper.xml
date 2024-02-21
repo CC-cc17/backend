@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyblue.sys.mapper.CompanyDetailMapper">
+
+    <select id="selectCompanyDetailByUid" resultType="com.skyblue.sys.entity.CompanyDetail">
+        SELECT cd.*
+        FROM Company_Detail cd
+        JOIN Sys_User su ON su.uid = cd.uid
+        WHERE su.uid = #{uid}
+    </select>
+
+    <select id="selectMatchedStudentsByCompanyId" resultType="com.skyblue.sys.entity.StudentDetail">
+        SELECT sd.* FROM student_detail sd
+        JOIN job_match jm ON sd.id = jm.student_id
+        WHERE jm.company_id = #{companyId}
+    </select>
+</mapper>
